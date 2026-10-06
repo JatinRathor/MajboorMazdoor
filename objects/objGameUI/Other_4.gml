@@ -1,0 +1,1 @@
+if (room != rmGameMenu) startScreen = false;

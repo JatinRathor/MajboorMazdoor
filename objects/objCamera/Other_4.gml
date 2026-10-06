@@ -1,0 +1,1 @@
+room_start_view_setup();

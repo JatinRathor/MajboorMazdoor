@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"game_functions",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"game_functions",
+  "parent":{
+    "name":"MajboorMazdoor",
+    "path":"MajboorMazdoor.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
