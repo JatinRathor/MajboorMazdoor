@@ -1,9 +1,9 @@
 current_level = 0;
 gameLevels = 
 [
-    rmGameMenu,
-    rmTutorialArea,
-    rmSubwaySurfer,
+    //rmGameMenu,
+   // rmTutorialArea,
+    //rmSubwaySurfer,
     rmLevel1,
     rmLevel2,
     rmLevel5,

@@ -27,6 +27,7 @@ automation_setup = function(){
                        zSpd = 0; 
                        max_jump = 1; 
                     }
+                    cutsceneBar();
                     objGameProgression.doubleJumpAbilitySwitch = false;
                     if (actor_obj.x < move_till_x) {actor_obj.xSpd = 3} else {phase = 1} 
                     break;
@@ -59,7 +60,7 @@ automation_setup = function(){
             case 7: if InputPressed(INPUT_VERB.ACCEPT) && (fadeInAlpha >= 1.5) {draw_comic = 1 phase = 8; fadeInAlpha=0} break;
             case 8: if InputPressed(INPUT_VERB.ACCEPT) && (fadeInAlpha >= 1.5) {draw_comic = -1 phase = 9;} break;
             case 9: 
-                   
+                   cutsceneBar(false);
                     actor_obj.playerState = PLAYERSTATE.IDLE;
                     instance_destroy();
                     break;

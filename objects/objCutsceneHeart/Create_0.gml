@@ -25,6 +25,8 @@ automation_setup = function(){
                        ySpd = 0;
                        zSpd = 0;  
                     }
+                    cutsceneBar();
+                    
                     with actor_obj {setSprite(sprPlayer)}
                     if (actor_obj.x < move_till_x) {actor_obj.xSpd = 3}  else {phase = 1} 
                     break;
@@ -39,17 +41,17 @@ automation_setup = function(){
                     
                     break;
 
-            case 3: with actor_obj {setSprite(sprPlayerHurt)}
-                    var _phase5Method = function(){phase = 5}
-                    call_later(0.2, time_source_units_seconds, _phase5Method, false);
-                    phase = 4;  
+            case 3: with actor_obj {setSprite(sprPlayerfall)}
+                    phase = 5;
+                    SHAKE_MAGNITUDE = 1;
+                   
                     break;
 
-            case 4: break;
-
-
-
-            case 5: instance_create_layer(CAMERA.xview + 80,CAMERA.yview + 18,"Instances",objFallingHeart);
+            case 5:    
+                    
+                    if instance_exists(objPlayer)
+                    var _heart = instance_create_layer(objPlayer.x+5,objPlayer.y-22,"Instances",objFallingHeart);
+                    
                     with(objGameUI)
                     {
                         maxPlayerHP -= 1;
@@ -74,7 +76,7 @@ automation_setup = function(){
             case 8: if InputPressed(INPUT_VERB.ACCEPT) && (fadeInAlpha>1.5)  {phase = 9} break;
 
             case 9: 
-                     
+                      cutsceneBar(false);
                       actor_obj.playerState = PLAYERSTATE.IDLE;
                       instance_destroy();
                       break;

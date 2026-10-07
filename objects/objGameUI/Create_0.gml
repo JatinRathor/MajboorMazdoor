@@ -1,6 +1,10 @@
-playerHp = 5;
+playerHp = 4;
 playerDead = false;
+playeDeadTimmer = false;
 gamePaused = false;
 startScreen = true;
-maxPlayerHP = 5;
+maxPlayerHP = 4;
 heartFrame = 0;
+cutscenePlaying = false;
+
+cutsceneBarFadein = 0;

@@ -4,7 +4,8 @@ enum ENEMYSTATE {
     MOVING,
     PAUSE,
     ATTACK,
-    HURT
+    HURT,
+    DEAD
     
 }
 moveSpeed = 0.5;       
@@ -30,6 +31,7 @@ hurtMethod = function(){
     
     canHurt = true;
     if (!GAMEPAUSED) enemyState = ENEMYSTATE.IDLE else enemyState = ENEMYSTATE.PAUSE;
+   
 
 }
 

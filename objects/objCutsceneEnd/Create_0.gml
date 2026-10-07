@@ -25,6 +25,7 @@ automation_setup = function(){
                        ySpd = 0;
                        zSpd = 0;  
                     }
+                    cutsceneBar();
                     with actor_obj {setSprite(sprPlayer)}
                     if (actor_obj.x < move_till_x) {actor_obj.xSpd = 3}  else {phase = 1; objGameMusic.playSFX(sfxShithappens);}  
                     break;
@@ -36,7 +37,7 @@ automation_setup = function(){
            
 
 
-            case 2:
+            case 2:   cutsceneBar(false);
                       game_pause(false);
                       instance_destroy();
                       break;

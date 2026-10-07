@@ -1,0 +1,3 @@
+ playerDead = true;
+
+     

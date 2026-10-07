@@ -18,13 +18,20 @@ height = 22;
 
 shadow = instance_create_layer(x,y,"Instances",objShadow);
 shadow.owner = self;
-
+_attack_object = noone;
 
 
 hurtMethod = function(){
     
-     xSpd = 0;
-    if (!GAMEPAUSED) playerState = PLAYERSTATE.IDLE else playerState = PLAYERSTATE.PAUSE;
+    xSpd = 0;
+    if (objGameUI.playerHp <= 0) {
+    playerState = PLAYERSTATE.DEAD 
+    objGameUI.alarm[0] = 40;
+    objGameMusic.playSFX(sfxShithappens);
+    exit}
+    if (!GAMEPAUSED) {
+    playerState = PLAYERSTATE.IDLE }
+    else {playerState = PLAYERSTATE.PAUSE;}
     
 
 }
@@ -51,7 +58,7 @@ playerMovement = function(){
     
     if !surferMode 
     {xSpd =  lerp(xSpd,_x_direction*moveSpeed,acceleration);} else {xSpd =  lerp(xSpd,1*moveSpeed*1.5,acceleration);}   
-    ySpd =  lerp(ySpd,_y_direction*moveSpeed,acceleration);
+    ySpd =  lerp(ySpd,_y_direction*(moveSpeed*0.8),acceleration);
     if (_jump_pressed) && (jump_counter<max_jump)
     {   
         objGameMusic.playSFX(sfxJump);
@@ -123,7 +130,7 @@ collisionProcess = function(){
 collisionWithOther = function() {
 
     
-    if place_meeting(x+sign(xSpd),y+sign(ySpd) + z,objParDangerObstacle)
+    if place_meeting_3d(x+sign(xSpd),y+sign(ySpd),z,objParDangerObstacle)
     {
         var _is_moving_fast = (xSpd >= moveSpeed * 0.8) || (xSpd <= -moveSpeed * 0.8)
         
@@ -153,10 +160,10 @@ collisionWithOther = function() {
     }
 
     
-    if place_meeting(x+sign(xSpd),y+sign(ySpd) + z,objParEnemyAttack)
+    if place_meeting_3d(x+sign(xSpd),y+sign(ySpd),z,objParEnemyAttack)
     {
         var _other = instance_place(x+sign(xSpd), y+sign(ySpd) + z, objParEnemyAttack);
-        if (playerState != PLAYERSTATE.HURT) && instance_exists(_other)
+        if (playerState != PLAYERSTATE.HURT) && (playerState != PLAYERSTATE.DEAD) && instance_exists(_other)
         {
             hurtRegister(_other)
             
@@ -164,7 +171,7 @@ collisionWithOther = function() {
     
     }
 
-    if place_meeting(x+sign(xSpd),y+sign(ySpd) + z ,objTrapArea)
+    if place_meeting_3d(x+sign(xSpd),y+sign(ySpd),z ,objTrapArea)
     {
         var _other = instance_place(x+sign(xSpd), y+sign(ySpd) + z, objTrapArea);
         if (playerState != PLAYERSTATE.HURT) && instance_exists(_other) && (z == floorZ) && (playerState != PLAYERSTATE.AUTOMATED)
@@ -176,7 +183,7 @@ collisionWithOther = function() {
     }
 
     
-    if place_meeting(x+sign(xSpd),y+sign(ySpd) + z,objGrill) 
+    if place_meeting_3d(x+sign(xSpd),y+sign(ySpd),z,objGrill) 
     {
        
         var _other = instance_place(x+sign(xSpd), y+sign(ySpd) + z, objGrill);
@@ -195,7 +202,7 @@ collisionWithOther = function() {
     
     }
 
-    if place_meeting(x+sign(xSpd),y+sign(ySpd) + z,objNextRoomDoors) 
+    if place_meeting_3d(x+sign(xSpd),y+sign(ySpd),z,objNextRoomDoors) 
     {
        
            show_debug_message("Moving to next room")
@@ -211,7 +218,7 @@ collisionWithOther = function() {
 
 
 
-    if place_meeting(x+sign(xSpd),y+sign(ySpd) + z,objCutscenePar) 
+    if place_meeting_3d(x+sign(xSpd),y+sign(ySpd),z,objCutscenePar) 
     {
        
         var _other = instance_place(x+sign(xSpd), y+sign(ySpd) + z, objCutscenePar);
@@ -226,7 +233,7 @@ collisionWithOther = function() {
     
     }
 
-    if place_meeting(x+sign(xSpd),y+sign(ySpd) + z,objBegger) 
+    if place_meeting_3d(x+sign(xSpd),y+sign(ySpd),z,objBegger) 
     {
        
         var _other = instance_place(x+sign(xSpd), y+sign(ySpd) + z, objBegger);
@@ -240,7 +247,7 @@ collisionWithOther = function() {
     
     }
 
-    if place_meeting(x+sign(xSpd),y+sign(ySpd) + z,objFallingHeart) 
+    if place_meeting_3d(x+sign(xSpd),y+sign(ySpd),z,objFallingHeart) 
     {
        
         var _other = instance_place(x+sign(xSpd), y+sign(ySpd) + z, objFallingHeart);
@@ -253,7 +260,7 @@ collisionWithOther = function() {
     
     }
     
-    if place_meeting(x+sign(xSpd),y+sign(ySpd) + z,objPoop) 
+    if place_meeting_3d(x+sign(xSpd),y+sign(ySpd),z,objPoop) 
     {
         var _other = instance_place(x+sign(xSpd), y+sign(ySpd) + z, objPoop);
            show_debug_message("Poopy")
@@ -270,7 +277,7 @@ collisionWithOther = function() {
     }
 
     
-    if place_meeting(x+sign(xSpd),y+sign(ySpd) + z,objSmallCardBoardBox) 
+    if place_meeting_3d(x+sign(xSpd),y+sign(ySpd),z,objSmallCardBoardBox) 
     {
         var _other = instance_place(x+sign(xSpd), y+sign(ySpd) + z, objSmallCardBoardBox);
            show_debug_message("Cardboard Box")
@@ -285,7 +292,7 @@ collisionWithOther = function() {
        
     }
 
-    if place_meeting(x+sign(xSpd),y+sign(ySpd) + z,objCone) 
+    if place_meeting_3d(x+sign(xSpd),y+sign(ySpd),z,objCone) 
     {
         var _other = instance_place(x+sign(xSpd), y+sign(ySpd) + z, objCone);
            show_debug_message("Cone")

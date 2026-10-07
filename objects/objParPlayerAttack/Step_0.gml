@@ -2,12 +2,14 @@ if instance_exists(owner)
 {
      x = owner.x;
      y = owner.y;
+     z = owner.z;   
+     image_xscale = owner.image_xscale;   
 }
 
 
 if place_meeting_3d(x,y,z,objEnemy)
 {
-    var _other = instance_place(x, y, objEnemy);
+    var _other = instance_place(x, y + z, objEnemy);
     with (_other) 
     {   if (canHurt == true)
         {   

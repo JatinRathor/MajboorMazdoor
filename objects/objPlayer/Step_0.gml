@@ -70,6 +70,7 @@ switch (playerState) {
             PlayerAttackCreate(sprPlayerAttackBatMask);
     }   
      }
+    if (zSpd != 0)  playerMovement();     
     playerMovementProcess();
     collisionProcess();
     collisionWithOther();
@@ -95,14 +96,16 @@ switch (playerState) {
     
 
     case PLAYERSTATE.HURT:
-
-      if sprite_index != sprPlayerHurt
+      with(_attack_object) instance_destroy();  
+      if (sprite_index != sprPlayerHurt) && (sprite_index != sprPlayerGetup)
       {
             sprite_index = sprPlayerHurt;
             objGameMusic.playSFX(sfxHurt);   
         }
       xSpd =  lerp(xSpd,0,0.08);
-      ySpd =  lerp(ySpd,0,acceleration); 
+      ySpd =  lerp(ySpd,0,acceleration);   
+      if (z == 0) && (sprite_index == sprPlayerHurt) {   sprite_index = sprPlayerGetup  }
+     
       playerMovementProcess();  
       collisionProcess();
       
@@ -116,7 +119,20 @@ switch (playerState) {
     zSpd = 0;
     playerMovementProcess();
     collisionProcess();
-      
+
+     
+                
+    break;
+
+    case PLAYERSTATE.DEAD:
+    sprite_index = sprPlayerfall;
+     
+    xSpd = 0;
+    ySpd = 0;
+    zSpd = 0;
+        playerMovementProcess();  
+      collisionProcess();
+
      
                 
     break;

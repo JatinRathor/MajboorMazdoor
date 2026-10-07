@@ -26,6 +26,7 @@ automation_setup = function(){
                        ySpd = 0;
                        zSpd = 0;  
                     }
+                    cutsceneBar();
                     game_pause();
                     phase = 1
                     break;
@@ -57,6 +58,7 @@ automation_setup = function(){
             case 7: if InputPressed(INPUT_VERB.ACCEPT) && (fadeInAlpha >= 1.5) {draw_comic = 1 phase = 8; fadeInAlpha=0} break;
             case 8: if InputPressed(INPUT_VERB.ACCEPT) && (fadeInAlpha >= 1.5) {draw_comic = -1 phase = 9;} break;
             case 9: 
+                    cutsceneBar(false);
                     game_pause(false);
                     //actor_obj.playerState = PLAYERSTATE.IDLE;
                     instance_destroy();

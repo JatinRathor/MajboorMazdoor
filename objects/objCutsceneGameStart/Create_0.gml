@@ -25,6 +25,7 @@ automation_setup = function(){
                        ySpd = 0;
                        zSpd = 0;  
                     }
+                     cutsceneBar();
                     with actor_obj {setSprite(sprPlayer)}
                     if (actor_obj.x < move_till_x) {actor_obj.xSpd = 3}  else {phase = 1} 
                     break;
@@ -42,7 +43,7 @@ automation_setup = function(){
                     if InputPressed(INPUT_VERB.ACCEPT) && (fadeInAlpha>1.5)  {phase = 5 } 
                     break;
 
-            case 5:
+            case 5:    cutsceneBar(false);     
                       game_pause(false);
                       instance_destroy();
                       break;

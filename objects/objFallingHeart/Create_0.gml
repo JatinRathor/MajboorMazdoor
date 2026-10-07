@@ -4,3 +4,7 @@ origin_y = y;
 image_speed = 0;
 picked = false;
 depth = 0;
+
+yspd = 0
+xspd = 0;
+

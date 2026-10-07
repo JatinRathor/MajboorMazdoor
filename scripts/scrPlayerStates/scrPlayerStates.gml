@@ -7,14 +7,15 @@ enum PLAYERSTATE{
     AUTOMATED,
     HURT,
     DASH,
-    PAUSE
+    PAUSE,
+    DEAD    
     
 }
 
 function PlayerAttackCreate(_attack_mask_sprite){
         
-    var _attack_object = instance_create_depth(x,y,depth,objParPlayerAttack)
-    _attack_object.visible = true;
+    _attack_object = instance_create_depth(x,y+z,depth,objParPlayerAttack)
+    _attack_object.visible = false;
     _attack_object.owner = objPlayer;
     _attack_object.height = sprite_get_height(_attack_mask_sprite)
     _attack_object.sprite_index = _attack_mask_sprite;

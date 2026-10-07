@@ -38,3 +38,9 @@ function setSprite(_sprite,_index= -1,_speed =1){
 
 
 }
+
+function cutsceneBar(_value = true){
+    
+     with(objGameUI) cutscenePlaying = _value;
+
+}

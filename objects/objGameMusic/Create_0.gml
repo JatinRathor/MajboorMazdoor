@@ -19,7 +19,7 @@ playSFX = function(_sfxName){
     audio_play_sound(_sfxName,0,false,gameMusicLevel);
 }
 
-gameMusicLevel = 0.7;
+gameMusicLevel = 0.4;
 fadeIn = 1;
 
  audio_play_sound(currentBGMusic,0,true,gameMusicLevel);

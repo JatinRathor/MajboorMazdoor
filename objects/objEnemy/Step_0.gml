@@ -1,7 +1,14 @@
 depth = -bbox_bottom + z*2;
 
-if (hp<= 0) instance_destroy();
 
+ if (hp<= 0) {
+    if (enemyState != ENEMYSTATE.DEAD)
+    {   
+        alarm[0] = 8;
+        enemyState = ENEMYSTATE.DEAD;
+    }
+    
+}
 switch (enemyState) {
 
     case ENEMYSTATE.IDLE: setSprite(baseSprite); 
@@ -51,7 +58,14 @@ switch (enemyState) {
     
     case ENEMYSTATE.HURT:  xSpd =  lerp(xSpd,0,0.1);
                            ySpd =  lerp(ySpd,0,0.1);    
+                           with(_attack_object) instance_destroy(); 
                            break;   
+
+    case ENEMYSTATE.DEAD:  xSpd =  lerp(xSpd,0,0.1);
+                           ySpd =  lerp(ySpd,0,0.1);    
+                           with(_attack_object) instance_destroy(); 
+                           break;   
+
 
     case ENEMYSTATE.PAUSE: xSpd =  0;
                            ySpd =  0;    

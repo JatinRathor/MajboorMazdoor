@@ -1,20 +1,24 @@
 
+depth = -bbox_bottom 
 
 switch (fallPhase) {
 
-    case 0:     fallPhase = 1;
-                var _fallDown = function(){fallPhase = 2}
-                call_later(1, time_source_units_seconds, _fallDown, false);
+    case 0: fallPhase = 1;
+           
             break; 
 
-    case 1: x = origin_x + irandom_range(-1,1);  
+    case 1: xspd = 3;  
+            yspd = -8;
+            fallPhase = 2;          
             break; 
 
-    case 2: y += 4;
-            if (y>190) fallPhase = -1;
+    case 2: yspd += 0.5;
+            
+            var _fallDown = function(){fallPhase = -1}
+            call_later(0.5, time_source_units_seconds, _fallDown, false);
             break; 
 
-    case -1:
+    case -1:yspd =0;
             if (picked) 
             {
                 x = objPlayer.x;
@@ -24,5 +28,12 @@ switch (fallPhase) {
             break;
     
 }
+
+
+
+xspd = lerp(xspd,0,0.04);
+
+x += xspd;
+y += yspd;
 
     
